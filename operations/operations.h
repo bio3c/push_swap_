@@ -45,21 +45,20 @@ enum e_op
 	OP_RRR
 };
 
-void	set_opcount_ptr(t_opcount *c);
-void	inc_opcount(int type);
+void	inc_opcount(t_opcount *c, int type);
 void	swap(t_stack *s);
-int		sa(t_stack *a);
-int		sb(t_stack *b);
-int		ss(t_stack *a, t_stack *b);
-int		pa(t_stack *a, t_stack *b);
-int		pb(t_stack *b, t_stack *a);
+int		sa(t_opcount *c, t_stack *a);
+int		sb(t_opcount *c, t_stack *b);
+int		ss(t_opcount *c, t_stack *a, t_stack *b);
+int		pa(t_opcount *c, t_stack *a, t_stack *b);
+int		pb(t_opcount *c, t_stack *b, t_stack *a);
 void	rotate(t_stack *s);
-int		ra(t_stack *a);
-int		rb(t_stack *b);
-int		rr(t_stack *a, t_stack *b);
+int		ra(t_opcount *c, t_stack *a);
+int		rb(t_opcount *c, t_stack *b);
+int		rr(t_opcount *c, t_stack *a, t_stack *b);
 void	rev_rotate(t_stack *s);
-int		rra(t_stack *a);
-int		rrb(t_stack *b);
-int		rrr(t_stack *a, t_stack *b);
+int		rra(t_opcount *c, t_stack *a);
+int		rrb(t_opcount *c, t_stack *b);
+int		rrr(t_opcount *c, t_stack *a, t_stack *b);
 
 #endif

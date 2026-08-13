@@ -6,7 +6,7 @@
 /*   By: sarahbanko <sarahbanko@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/10 14:01:59 by sbanko            #+#    #+#             */
-/*   Updated: 2026/08/11 16:36:46 by sarahbanko       ###   ########.fr       */
+/*   Updated: 2026/08/13 00:00:00 by adrperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	swap(t_stack *s)
 	stack_push_top(s, temp_2);
 }
 
-int	sa(t_stack *a)
+int	sa(t_opcount *c, t_stack *a)
 {
 	int	count_sa;
 
@@ -33,12 +33,12 @@ int	sa(t_stack *a)
 	if (!a || a->size < 2)
 		return (0);
 	swap(a);
-	inc_opcount(OP_SA);
+	inc_opcount(c, OP_SA);
 	write(1, "sa\n", 3);
 	return (count_sa);
 }
 
-int	sb(t_stack *b)
+int	sb(t_opcount *c, t_stack *b)
 {
 	int	count_sb;
 
@@ -46,12 +46,12 @@ int	sb(t_stack *b)
 	if (!b || b->size < 2)
 		return (0);
 	swap(b);
-	inc_opcount(OP_SB);
+	inc_opcount(c, OP_SB);
 	write(1, "sb\n", 3);
 	return (count_sb);
 }
 
-int	ss(t_stack *a, t_stack *b)
+int	ss(t_opcount *c, t_stack *a, t_stack *b)
 {
 	int	count_ss;
 
@@ -62,7 +62,7 @@ int	ss(t_stack *a, t_stack *b)
 		return (0);
 	swap(a);
 	swap(b);
-	inc_opcount(OP_SS);
+	inc_opcount(c, OP_SS);
 	write(1, "ss\n", 3);
 	return (count_ss);
 }

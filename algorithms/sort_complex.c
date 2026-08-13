@@ -6,13 +6,13 @@
 /*   By: PersonB <personb@42.fr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/19 00:00:00 by PersonB           #+#    #+#             */
-/*   Updated: 2026/08/12 11:02:38 by adrperei         ###   ########.fr       */
+/*   Updated: 2026/08/13 00:00:00 by adrperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "algorithms.h"
 
-static void	process_bit(t_stack *a, t_stack *b, int bit)
+static void	process_bit(t_stack *a, t_stack *b, int bit, t_opcount *c)
 {
 	int	cnt;
 	int	i;
@@ -22,16 +22,16 @@ static void	process_bit(t_stack *a, t_stack *b, int bit)
 	while (i < cnt)
 	{
 		if (((a->top->index >> bit) & 1) == 0)
-			pb(b, a);
+			pb(c, b, a);
 		else
-			ra(a);
+			ra(c, a);
 		i++;
 	}
 	while (b->size > 0)
-		pa(a, b);
+		pa(c, a, b);
 }
 
-int	sort_complex(t_stack *a, t_stack *b)
+int	sort_complex(t_stack *a, t_stack *b, t_opcount *c)
 {
 	int	max_bit;
 	int	bit;
@@ -42,7 +42,7 @@ int	sort_complex(t_stack *a, t_stack *b)
 	bit = 0;
 	while (bit < max_bit)
 	{
-		process_bit(a, b, bit);
+		process_bit(a, b, bit, c);
 		bit++;
 	}
 	return (0);

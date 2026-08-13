@@ -6,7 +6,7 @@
 /*   By: sbanko <sbanko@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/07 12:09:35 by sbanko            #+#    #+#             */
-/*   Updated: 2026/08/10 13:40:43 by sbanko           ###   ########.fr       */
+/*   Updated: 2026/08/13 00:00:00 by adrperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,18 +42,18 @@ static int	find_bottom_distance_b(t_stack *b, int current_index)
 	return (distance);
 }
 
-int	push_stack_a(t_stack *b, int current_index)
+int	push_stack_a(t_stack *b, int current_index, t_opcount *c)
 {
 	if (find_top_distance_b(b, current_index)
 		< find_bottom_distance_b(b, current_index))
 	{
 		while (b->top->index != current_index)
-			rb(b);
+			rb(c, b);
 	}
 	else
 	{
 		while (b->top->index != current_index)
-			rrb(b);
+			rrb(c, b);
 	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: sbanko <sbanko@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/05 13:08:39 by sarahbanko        #+#    #+#             */
-/*   Updated: 2026/08/10 13:39:35 by sbanko           ###   ########.fr       */
+/*   Updated: 2026/08/13 00:00:00 by adrperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	init_chunk(t_chunk *chunk, int size)
 	chunk->current = 0;
 }
 
-static int	move_b_to_a(t_stack *a, t_stack *b)
+static int	move_b_to_a(t_stack *a, t_stack *b, t_opcount *c)
 {
 	int	current_index;
 
@@ -34,14 +34,14 @@ static int	move_b_to_a(t_stack *a, t_stack *b)
 	current_index = b->size - 1;
 	while (b->size > 0)
 	{
-		push_stack_a(b, current_index);
-		pa(a, b);
+		push_stack_a(b, current_index, c);
+		pa(c, a, b);
 		current_index--;
 	}
 	return (0);
 }
 
-int	sort_medium(t_stack *a, t_stack *b)
+int	sort_medium(t_stack *a, t_stack *b, t_opcount *c)
 {
 	t_chunk	chunk;
 
@@ -50,7 +50,7 @@ int	sort_medium(t_stack *a, t_stack *b)
 	init_chunk(&chunk, a->size);
 	while (chunk.current < chunk.count)
 	{
-		process_chunk(a, b, chunk.start, chunk.end);
+		process_chunk(a, b, &chunk, c);
 		chunk.current++;
 		chunk.start = chunk.end + 1;
 		chunk.elements = chunk.base_size;
@@ -58,6 +58,6 @@ int	sort_medium(t_stack *a, t_stack *b)
 			chunk.elements++;
 		chunk.end = chunk.start + chunk.elements - 1;
 	}
-	move_b_to_a(a, b);
+	move_b_to_a(a, b, c);
 	return (0);
 }

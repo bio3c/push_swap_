@@ -6,7 +6,7 @@
 /*   By: sbanko <sbanko@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/06 16:30:23 by sbanko            #+#    #+#             */
-/*   Updated: 2026/08/10 14:01:15 by sbanko           ###   ########.fr       */
+/*   Updated: 2026/08/13 00:00:00 by adrperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,35 +54,35 @@ static int	find_bottom_distance_a(t_stack *a, int start, int end)
 	return (distance);
 }
 
-static int	move_chunk_to_top_a(t_stack *a, int start, int end)
+static int	move_chunk_to_top_a(t_stack *a, int start, int end, t_opcount *c)
 {
 	if (find_top_distance_a(a, start, end)
 		< find_bottom_distance_a(a, start, end))
 	{
 		while (!(a->top->index >= start
 				&& a->top->index <= end))
-			ra(a);
+			ra(c, a);
 	}
 	else
 	{
 		while (!(a->top->index >= start
 				&& a->top->index <= end))
-			rra(a);
+			rra(c, a);
 	}
 	return (0);
 }
 
-int	process_chunk(t_stack *a, t_stack *b, int start, int end)
+int	process_chunk(t_stack *a, t_stack *b, t_chunk *chunk, t_opcount *c)
 {
 	int	sent;
 
 	sent = 0;
-	while (sent < end - start + 1)
+	while (sent < chunk->end - chunk->start + 1)
 	{
-		move_chunk_to_top_a(a, start, end);
-		pb(b, a);
-		if (b->top->index < (start + end) / 2)
-			rb(b);
+		move_chunk_to_top_a(a, chunk->start, chunk->end, c);
+		pb(c, b, a);
+		if (b->top->index < (chunk->start + chunk->end) / 2)
+			rb(c, b);
 		sent++;
 	}
 	return (0);

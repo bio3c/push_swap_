@@ -29,13 +29,13 @@ typedef struct s_chunk
 }	t_chunk;
 
 double	compute_disorder(t_stack *s);
-int		sort_simple(t_stack *a, t_stack *b);
-int		sort_complex(t_stack *a, t_stack *b);
-int		sort_medium(t_stack *a, t_stack *b);
+int		sort_simple(t_stack *a, t_stack *b, t_opcount *c);
+int		sort_complex(t_stack *a, t_stack *b, t_opcount *c);
+int		sort_medium(t_stack *a, t_stack *b, t_opcount *c);
 int		square_root(int n);
-int		process_chunk(t_stack *a, t_stack *b, int start, int end);
-int		push_stack_a(t_stack *b, int current_index);
-int		sort_adaptive(t_stack *a, t_stack *b);
+int		process_chunk(t_stack *a, t_stack *b, t_chunk *chunk, t_opcount *c);
+int		push_stack_a(t_stack *b, int current_index, t_opcount *c);
+int		sort_adaptive(t_stack *a, t_stack *b, t_opcount *c);
 void	bench_disorder(double disorder);
 void	bench_strategy(t_strategy strat, double disorder, t_opcount *c);
 

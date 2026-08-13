@@ -6,7 +6,7 @@
 /*   By: sarahbanko <sarahbanko@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/10 14:03:05 by sbanko            #+#    #+#             */
-/*   Updated: 2026/08/11 16:36:13 by sarahbanko       ###   ########.fr       */
+/*   Updated: 2026/08/13 00:00:00 by adrperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	rev_rotate(t_stack *s)
 	stack_push_top(s, last_node);
 }
 
-int	rra(t_stack *a)
+int	rra(t_opcount *c, t_stack *a)
 {
 	int	count_rra;
 
@@ -30,12 +30,12 @@ int	rra(t_stack *a)
 	if (!a || a->size < 2)
 		return (0);
 	rev_rotate(a);
-	inc_opcount(OP_RRA);
+	inc_opcount(c, OP_RRA);
 	write(1, "rra\n", 4);
 	return (count_rra);
 }
 
-int	rrb(t_stack *b)
+int	rrb(t_opcount *c, t_stack *b)
 {
 	int	count_rrb;
 
@@ -43,12 +43,12 @@ int	rrb(t_stack *b)
 	if (!b || b->size < 2)
 		return (0);
 	rev_rotate(b);
-	inc_opcount(OP_RRB);
+	inc_opcount(c, OP_RRB);
 	write(1, "rrb\n", 4);
 	return (count_rrb);
 }
 
-int	rrr(t_stack *a, t_stack *b)
+int	rrr(t_opcount *c, t_stack *a, t_stack *b)
 {
 	int	count_rrr;
 
@@ -57,7 +57,7 @@ int	rrr(t_stack *a, t_stack *b)
 		return (0);
 	rev_rotate(a);
 	rev_rotate(b);
-	inc_opcount(OP_RRR);
+	inc_opcount(c, OP_RRR);
 	write(1, "rrr\n", 4);
 	return (count_rrr);
 }

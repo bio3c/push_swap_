@@ -6,7 +6,7 @@
 /*   By: sarahbanko <sarahbanko@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/11 13:09:16 by sarahbanko        #+#    #+#             */
-/*   Updated: 2026/08/12 11:30:00 by adrperei         ###   ########.fr       */
+/*   Updated: 2026/08/12 14:28:07 by adrperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,13 +55,9 @@ static void	bench_print_strategy(t_strategy strat, double disorder)
 
 static void	bench_print_op(int n, char *name)
 {
-	if (n > 0)
-	{
-		write(2, name, ft_strlen(name));
-		write(2, " ", 1);
-		ft_putnbr_fd(n, 2);
-		write(2, "\n", 1);
-	}
+	write(2, name, ft_strlen(name));
+	write(2, " ", 1);
+	ft_putnbr_fd(n, 2);
 }
 
 static void	bench_print_ops(t_opcount *c)
@@ -70,17 +66,18 @@ static void	bench_print_ops(t_opcount *c)
 	ft_putnbr_fd(c->sa + c->sb + c->ss + c->pa + c->pb
 		+ c->ra + c->rb + c->rr + c->rra + c->rrb + c->rrr, 2);
 	write(2, "\n", 1);
-	bench_print_op(c->sa, "sa");
-	bench_print_op(c->sb, "sb");
-	bench_print_op(c->ss, "ss");
-	bench_print_op(c->pa, "pa");
-	bench_print_op(c->pb, "pb");
-	bench_print_op(c->ra, "ra");
-	bench_print_op(c->rb, "rb");
-	bench_print_op(c->rr, "rr");
-	bench_print_op(c->rra, "rra");
-	bench_print_op(c->rrb, "rrb");
-	bench_print_op(c->rrr, "rrr");
+	bench_print_op(c->sa, "sa: ");
+	bench_print_op(c->sb, " sb: ");
+	bench_print_op(c->ss, " ss: ");
+	bench_print_op(c->pa, " pa: ");
+	bench_print_op(c->pb, " pb: ");
+	write(2, "\n", 1);
+	bench_print_op(c->ra, "ra: ");
+	bench_print_op(c->rb, " rb: ");
+	bench_print_op(c->rr, " rr: ");
+	bench_print_op(c->rra, " rra: ");
+	bench_print_op(c->rrb, " rrb: ");
+	bench_print_op(c->rrr, " rrr: ");
 }
 
 void	bench_strategy(t_strategy strat, double disorder, t_opcount *c)

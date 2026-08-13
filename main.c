@@ -43,28 +43,38 @@ static void	free_args(char **args, int argc)
 	free(args);
 }
 
+static void	run_strategy(t_stack *a, t_stack *b, t_strategy strat, t_opcount *c)
+{
+	index_stack(a);
+	if (strat == SIMPLE)
+		sort_simple(a, b, c);
+	else if (strat == MEDIUM)
+		sort_medium(a, b, c);
+	else if (strat == COMPLEX)
+		sort_complex(a, b, c);
+	else
+		sort_adaptive(a, b, c);
+}
+
 static void	sort_stack(t_stack *a, t_stack *b, t_strategy strat, int bench)
 {
 	double		disorder;
 	t_opcount	opc;
 
 	opc = (t_opcount){0};
-	if (is_sorted(a))
-		return ;
-	index_stack(a);
 	disorder = 0.0;
 	if (bench)
 		disorder = compute_disorder(a);
-	set_opcount_ptr(&opc);
-	if (strat == SIMPLE)
-		sort_simple(a, b);
-	else if (strat == MEDIUM)
-		sort_medium(a, b);
-	else if (strat == COMPLEX)
-		sort_complex(a, b);
-	else
-		sort_adaptive(a, b);
-	set_opcount_ptr(NULL);
+	if (is_sorted(a))
+	{
+		if (bench)
+		{
+			bench_disorder(disorder);
+			bench_strategy(strat, disorder, &opc);
+		}
+		return ;
+	}
+	run_strategy(a, b, strat, &opc);
 	if (bench)
 	{
 		bench_disorder(disorder);
