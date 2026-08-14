@@ -33,8 +33,7 @@ int	sa(t_opcount *c, t_stack *a)
 	if (!a || a->size < 2)
 		return (0);
 	swap(a);
-	inc_opcount(c, OP_SA);
-	write(1, "sa\n", 3);
+	emit(c, OP_SA, "sa\n", 3);
 	return (count_sa);
 }
 
@@ -46,8 +45,7 @@ int	sb(t_opcount *c, t_stack *b)
 	if (!b || b->size < 2)
 		return (0);
 	swap(b);
-	inc_opcount(c, OP_SB);
-	write(1, "sb\n", 3);
+	emit(c, OP_SB, "sb\n", 3);
 	return (count_sb);
 }
 
@@ -62,7 +60,6 @@ int	ss(t_opcount *c, t_stack *a, t_stack *b)
 		return (0);
 	swap(a);
 	swap(b);
-	inc_opcount(c, OP_SS);
-	write(1, "ss\n", 3);
+	emit(c, OP_SS, "ss\n", 3);
 	return (count_ss);
 }

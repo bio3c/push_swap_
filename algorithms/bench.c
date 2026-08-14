@@ -63,8 +63,7 @@ static void	bench_print_op(int n, char *name)
 static void	bench_print_ops(t_opcount *c)
 {
 	write(2, "total: ", 7);
-	ft_putnbr_fd(c->sa + c->sb + c->ss + c->pa + c->pb
-		+ c->ra + c->rb + c->rr + c->rra + c->rrb + c->rrr, 2);
+	ft_putnbr_fd(count_ops(c), 2);
 	write(2, "\n", 1);
 	bench_print_op(c->sa, "sa: ");
 	bench_print_op(c->sb, " sb: ");

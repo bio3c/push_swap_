@@ -56,26 +56,24 @@ static void	run_strategy(t_stack *a, t_stack *b, t_strategy strat, t_opcount *c)
 		sort_adaptive(a, b, c);
 }
 
-static void	sort_stack(t_stack *a, t_stack *b, t_strategy strat, int bench)
+static void	sort_stack(t_stack *a, t_stack *b, t_strategy strat, t_flags *f)
 {
 	double		disorder;
 	t_opcount	opc;
 
 	opc = (t_opcount){0};
+	opc.mode = f->mode;
 	disorder = 0.0;
-	if (bench)
+	if (f->bench)
 		disorder = compute_disorder(a);
-	if (is_sorted(a))
+	if (!is_sorted(a))
+		run_strategy(a, b, strat, &opc);
+	if (f->mode)
 	{
-		if (bench)
-		{
-			bench_disorder(disorder);
-			bench_strategy(strat, disorder, &opc);
-		}
-		return ;
+		ft_putnbr_fd(count_ops(&opc), 1);
+		write(1, "\n", 1);
 	}
-	run_strategy(a, b, strat, &opc);
-	if (bench)
+	else if (f->bench)
 	{
 		bench_disorder(disorder);
 		bench_strategy(strat, disorder, &opc);
@@ -85,7 +83,7 @@ static void	sort_stack(t_stack *a, t_stack *b, t_strategy strat, int bench)
 int	main(int argc, char **argv)
 {
 	t_strategy	strat;
-	int			bench;
+	t_flags		flags;
 	t_stack		*a;
 	t_stack		*b;
 	char		**args;
@@ -93,7 +91,7 @@ int	main(int argc, char **argv)
 	args = build_args(argc, argv, &argc);
 	if (!args)
 		return (1);
-	a = parsing(argc, args, &strat, &bench);
+	a = parsing(argc, args, &strat, &flags);
 	if (!a)
 	{
 		free_args(args, argc);
@@ -105,7 +103,7 @@ int	main(int argc, char **argv)
 	b = stack_init();
 	if (!b)
 		return (stack_free(a), 1);
-	sort_stack(a, b, strat, bench);
+	sort_stack(a, b, strat, &flags);
 	stack_free(a);
 	stack_free(b);
 	return (0);

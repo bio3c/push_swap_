@@ -18,7 +18,7 @@ static int	flag_err(void)
 	return (0);
 }
 
-static int	parse_flags(int argc, char **argv, t_strategy *s, int *bench)
+static int	parse_flags(int argc, char **argv, t_strategy *s, t_flags *f)
 {
 	int	i;
 
@@ -36,7 +36,7 @@ static int	parse_flags(int argc, char **argv, t_strategy *s, int *bench)
 			else if (match_flag(argv[i], "--adaptive"))
 				*s = ADAPTIVE;
 			else if (match_flag(argv[i], "--bench"))
-				*bench = 1;
+				f->bench = 1;
 			else
 				return (flag_err());
 		}
@@ -68,14 +68,15 @@ static int	add_num(t_stack *a, char *arg)
 	return (1);
 }
 
-t_stack	*parsing(int argc, char **argv, t_strategy *strat, int *bench)
+t_stack	*parsing(int argc, char **argv, t_strategy *strat, t_flags *flags)
 {
 	t_stack	*a;
 	int		i;
 
 	*strat = ADAPTIVE;
-	*bench = 0;
-	if (!parse_flags(argc, argv, strat, bench))
+	flags->bench = 0;
+	flags->mode = 0;
+	if (!parse_flags(argc, argv, strat, flags))
 		return (NULL);
 	a = stack_init();
 	if (!a)

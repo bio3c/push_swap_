@@ -30,8 +30,7 @@ int	ra(t_opcount *c, t_stack *a)
 	if (!a || a->size < 2)
 		return (0);
 	rotate(a);
-	inc_opcount(c, OP_RA);
-	write(1, "ra\n", 3);
+	emit(c, OP_RA, "ra\n", 3);
 	return (count_ra);
 }
 
@@ -43,8 +42,7 @@ int	rb(t_opcount *c, t_stack *b)
 	if (!b || b->size < 2)
 		return (0);
 	rotate(b);
-	inc_opcount(c, OP_RB);
-	write(1, "rb\n", 3);
+	emit(c, OP_RB, "rb\n", 3);
 	return (count_rb);
 }
 
@@ -57,7 +55,6 @@ int	rr(t_opcount *c, t_stack *a, t_stack *b)
 		return (0);
 	rotate(a);
 	rotate(b);
-	inc_opcount(c, OP_RR);
-	write(1, "rr\n", 3);
+	emit(c, OP_RR, "rr\n", 3);
 	return (count_rr);
 }

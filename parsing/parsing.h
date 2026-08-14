@@ -25,10 +25,15 @@ typedef enum s_strategy {
 	ADAPTIVE
 }	t_strategy;
 
+typedef struct s_flags {
+	int	bench;
+	int	mode;
+}	t_flags;
+
 int			match_flag(const char *user_flag, const char *real_flag);
 int			is_valid_int(const char *str, int *value);
 int			has_duplicate(t_stack *a, int value);
 char		**build_args(int argc, char **argv, int *out_argc);
-t_stack		*parsing(int argc, char **argv, t_strategy *strat, int *bench);
+t_stack		*parsing(int argc, char **argv, t_strategy *strat, t_flags *flags);
 
 #endif

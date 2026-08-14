@@ -12,6 +12,19 @@
 
 #include "operations.h"
 
+int	count_ops(t_opcount *c)
+{
+	return (c->sa + c->sb + c->ss + c->pa + c->pb
+		+ c->ra + c->rb + c->rr + c->rra + c->rrb + c->rrr);
+}
+
+void	emit(t_opcount *c, int type, char *op, int len)
+{
+	inc_opcount(c, type);
+	if (!c || !c->mode)
+		write(1, op, len);
+}
+
 void	inc_opcount(t_opcount *c, int type)
 {
 	if (!c)

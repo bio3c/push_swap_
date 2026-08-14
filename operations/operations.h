@@ -28,6 +28,7 @@ typedef struct s_opcount
 	int	rra;
 	int	rrb;
 	int	rrr;
+	int	mode;
 }	t_opcount;
 
 enum e_op
@@ -46,6 +47,8 @@ enum e_op
 };
 
 void	inc_opcount(t_opcount *c, int type);
+void	emit(t_opcount *c, int type, char *op, int len);
+int		count_ops(t_opcount *c);
 void	swap(t_stack *s);
 int		sa(t_opcount *c, t_stack *a);
 int		sb(t_opcount *c, t_stack *b);
